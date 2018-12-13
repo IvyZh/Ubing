@@ -117,11 +117,12 @@ public class ViewUtils {
                 // 4.反射执行方法
                 mMethod.setAccessible(true);
                 try {
-                    mMethod.invoke(mHandlerType, v);
+                    mMethod.invoke(mHandlerType, null);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                     try {
-                        mMethod.invoke(mHandlerType, null);
+                        mMethod.invoke(mHandlerType, v);
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
@@ -135,11 +136,12 @@ public class ViewUtils {
                     if (NetUtils.isNetworkConnected(context)) {//有网络
                         mMethod.setAccessible(true);
                         try {
-                            mMethod.invoke(mHandlerType, v);
+
+                            mMethod.invoke(mHandlerType, null);
                         } catch (Exception e) {
                             e.printStackTrace();
                             try {
-                                mMethod.invoke(mHandlerType, null);
+                                mMethod.invoke(mHandlerType, v);
                             } catch (Exception e1) {
                                 e1.printStackTrace();
                             }

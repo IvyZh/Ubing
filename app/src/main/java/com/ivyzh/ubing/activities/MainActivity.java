@@ -1,4 +1,4 @@
-package com.ivyzh.ubing;
+package com.ivyzh.ubing.activities;
 
 import android.widget.Button;
 import android.widget.TextView;
@@ -11,6 +11,7 @@ import com.ivyzh.baselibrary.ioc.OnClick;
 import com.ivyzh.baselibrary.ioc.ViewById;
 import com.ivyzh.baselibrary.log.L;
 import com.ivyzh.framelibrary.http.PreHttpCallBack;
+import com.ivyzh.ubing.R;
 import com.ivyzh.ubing.domain.NovelBean;
 
 public class MainActivity extends BaseActivity {
@@ -60,9 +61,9 @@ public class MainActivity extends BaseActivity {
         HttpUtils.with(this)
                 .addParam("name", "zz")
                 .addParam("pwd", "123456")
+                .post()
                 .url(url)
                 //.exchangeEngine(new XUtilsEngine())
-                .get()
                 .execute(new PreHttpCallBack<NovelBean>() {
                     @Override
                     public void onError(Exception e) {

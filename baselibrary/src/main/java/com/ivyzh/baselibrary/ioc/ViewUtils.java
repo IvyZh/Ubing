@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.Toast;
 
+import com.ivyzh.baselibrary.log.L;
 import com.ivyzh.baselibrary.utils.NetUtils;
 
 import java.lang.reflect.Field;
@@ -117,6 +118,7 @@ public class ViewUtils {
                 // 4.反射执行方法
                 mMethod.setAccessible(true);
                 try {
+                    L.v("mHandlerType:"+mHandlerType+",v:"+v);
                     mMethod.invoke(mHandlerType, null);
 
                 } catch (Exception e) {

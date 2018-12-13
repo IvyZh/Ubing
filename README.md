@@ -10,3 +10,6 @@ first commit.
     - mViewFinder.getContext() 这个方法后面需要优化，TODO
 - 完成BaseActivity
 - 完成简单的网络引擎，链式调用
+- Bmob
+    - 快速入门：http://doc.bmob.cn/data/android/
+    - 开发文档：http://doc.bmob.cn/data/android/develop_doc/#2

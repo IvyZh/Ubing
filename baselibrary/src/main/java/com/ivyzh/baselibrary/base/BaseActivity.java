@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.ivyzh.baselibrary.ioc.ViewUtils;
 
@@ -31,6 +32,11 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void startActivity(Class<? extends Activity> clz) {
         startActivity(new Intent(this, clz));
+    }
+
+
+    protected void toast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
 
 }

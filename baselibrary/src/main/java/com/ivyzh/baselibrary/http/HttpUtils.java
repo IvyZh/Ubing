@@ -1,6 +1,7 @@
 package com.ivyzh.baselibrary.http;
 
 import android.content.Context;
+import android.os.Handler;
 import android.text.TextUtils;
 
 import com.ivyzh.baselibrary.http.impl.OkHttpEngine;
@@ -9,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HttpUtils {
+    public static Handler mHandler = new Handler();
     // 上下文
     private Context mContext;
     // 网络访问引擎
@@ -80,6 +82,12 @@ public class HttpUtils {
         if (TextUtils.isEmpty(mUrl)) {
             throw new NullPointerException("访问路径不能为空");
         }
+
+        if (callBack == null) {
+            callBack = HttpCallBack.DEFAULT_CALL_BACK;
+        }
+
+        callBack.onPreExcute(mContext, mParams);
 
         if (mRequestMethod == GET_REQUEST) {
             mHttpEngine.get(mUrl, mParams, callBack, mCache);

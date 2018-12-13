@@ -1,21 +1,17 @@
 package com.ivyzh.ubing;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ivyzh.baselibrary.base.BaseActivity;
-import com.ivyzh.baselibrary.http.BaseModel;
-import com.ivyzh.baselibrary.http.HttpCallBack;
 import com.ivyzh.baselibrary.http.HttpUtils;
-import com.ivyzh.baselibrary.http.impl.XUtilsEngine;
 import com.ivyzh.baselibrary.ioc.CheckNet;
 import com.ivyzh.baselibrary.ioc.OnClick;
 import com.ivyzh.baselibrary.ioc.ViewById;
-import com.ivyzh.baselibrary.ioc.ViewUtils;
 import com.ivyzh.baselibrary.log.L;
+import com.ivyzh.framelibrary.http.PreHttpCallBack;
+import com.ivyzh.ubing.domain.NovelBean;
 
 public class MainActivity extends BaseActivity {
 
@@ -58,20 +54,35 @@ public class MainActivity extends BaseActivity {
     private void hello2() {
 
 
-        HttpUtils.with(this).addParam("name", "zz")
-                .url("www.baidu.com")
-                .exchangeEngine(new XUtilsEngine())
+        String url = "https://www.baidu.com";
+
+        url = "https://www.apiopen.top/novelApi";
+        HttpUtils.with(this)
+                .addParam("name", "zz")
+                .addParam("pwd", "123456")
+                .url(url)
+                //.exchangeEngine(new XUtilsEngine())
                 .get()
-                .execute(new HttpCallBack() {
+                .execute(new PreHttpCallBack<NovelBean>() {
                     @Override
                     public void onError(Exception e) {
+                        L.v("error -> " + e);
 
                     }
+
+//                    @Override
+//                    public void onSuccess(String result) {
+//                        L.v("success -> " + result);
+//                        mMsg.setText(result.toString());
+//                        super.onSuccess(result);
+//                    }
 
                     @Override
-                    public void onSuccess(Object result) {
-
+                    public void onSuccess(NovelBean resultJson) {
+                        L.v("success -> " + resultJson.getData().size());
                     }
+
+
                 });
 
     }

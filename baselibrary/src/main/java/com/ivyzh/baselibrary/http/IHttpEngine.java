@@ -7,6 +7,9 @@ import java.util.Map;
  */
 public interface IHttpEngine {
 
+
+
+
     void get(String url, Map<String, Object> params, HttpCallBack callBack, boolean cache);
 
     void post(String url, Map<String, Object> params, HttpCallBack callBack, boolean cache);

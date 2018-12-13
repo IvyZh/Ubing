@@ -8,6 +8,12 @@
 
 
     <Button
+        android:id="@+id/btn_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="login" />
+
+    <Button
         android:id="@+id/btn_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,7 +23,7 @@
         android:id="@+id/btn_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="delete" />
+        android:text="comment" />
 
     <Button
         android:id="@+id/btn_update"
@@ -37,12 +43,6 @@
         android:layout_height="wrap_content"
         android:text="query all" />
 
-
-    <Button
-        android:id="@+id/btn_other"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="other" />
 
     <TextView
         android:id="@+id/tv_msg"

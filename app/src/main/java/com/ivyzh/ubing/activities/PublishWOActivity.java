@@ -2,32 +2,35 @@ package com.ivyzh.ubing.activities;
 
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ivyzh.baselibrary.base.BaseActivity;
 import com.ivyzh.baselibrary.ioc.OnClick;
 import com.ivyzh.baselibrary.ioc.ViewById;
 import com.ivyzh.baselibrary.log.L;
 import com.ivyzh.ubing.R;
+import com.ivyzh.ubing.domain.CommentWorkOrder;
 import com.ivyzh.ubing.domain.Person;
 import com.ivyzh.ubing.domain.User;
+import com.ivyzh.ubing.domain.WorkOrder;
 
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.LogInListener;
 import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 
-public class TestActivity extends BaseActivity {
+public class PublishWOActivity extends BaseActivity {
     @ViewById(R.id.tv_msg)
     TextView tvMsg;
 
     @Override
     protected int getContentView() {
-        return R.layout.activity_test;
+        return R.layout.activity_publish;
     }
 
     @Override
@@ -46,7 +49,7 @@ public class TestActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.btn_add, R.id.btn_delete, R.id.btn_update, R.id.btn_query, R.id.btn_query_all, R.id.btn_other})
+    @OnClick({R.id.btn_add, R.id.btn_delete, R.id.btn_update, R.id.btn_query, R.id.btn_query_all, R.id.btn_login})
     private void btn(View view) {
         int id = view.getId();
         tvMsg.setText(id + "");
@@ -54,8 +57,8 @@ public class TestActivity extends BaseActivity {
             case R.id.btn_add:
                 add();
                 break;
-            case R.id.btn_delete:
-                delete();
+            case R.id.btn_delete://回复
+                comment();
                 break;
             case R.id.btn_update:
                 update();
@@ -67,19 +70,70 @@ public class TestActivity extends BaseActivity {
                 queryAll();
                 break;
 
-            case R.id.btn_other:
+            case R.id.btn_login:
                 otherOperate();
                 break;
         }
     }
 
+    private void comment() {
+
+        if (BmobUser.isLogin()) {
+            String publishUserId = BmobUser.getCurrentUser(User.class).getObjectId();
+            CommentWorkOrder commentWorkOrder = new CommentWorkOrder("835686f6da", "下载地址xxx", publishUserId);
+            commentWorkOrder.save(new SaveListener<String>() {
+                @Override
+                public void done(String objectId, BmobException e) {
+                    if (e == null) {
+                        toast("添加数据成功，返回objectId为：" + objectId);
+                    } else {
+                        toast("创建数据失败：" + e.getMessage());
+                    }
+                }
+            });
+        }
+
+    }
+
     private void otherOperate() {
 
-        signUp();
+        //signUp();
+        loginByAccount();
     }
 
 
     //-----------------------------------------------------------------------------
+
+
+    /**
+     * 账号密码登录
+     */
+    private void loginByAccount() {
+
+        boolean isLogin = BmobUser.isLogin();
+
+        L.v("isLogin:" + isLogin);
+        if (!isLogin) {
+            //此处替换为你的用户名密码
+            BmobUser.loginByAccount("zz", "1234566", new LogInListener<User>() {
+                @Override
+                public void done(User user, BmobException e) {
+                    if (e == null) {
+                        toast("success:" + user.getObjectId() + "," + user.getNickname());
+                    } else {
+                        toast("error");
+                    }
+                }
+            });
+        } else {
+            //获取当前用户以及用户属性,缓存的有效期为1年
+            User user = BmobUser.getCurrentUser(User.class);
+            L.v(user.toString());
+        }
+
+
+    }
+
 
     /**
      * 账号密码注册
@@ -185,20 +239,22 @@ public class TestActivity extends BaseActivity {
     }
 
     private void add() {
-        Person p2 = new Person();
-        p2.setName("lili");
-        p2.setAge(22);
-        p2.setAddress("北京海淀");
-        p2.save(new SaveListener<String>() {
-            @Override
-            public void done(String objectId, BmobException e) {
-                if (e == null) {
-                    toast("添加数据成功，返回objectId为：" + objectId);
-                } else {
-                    toast("创建数据失败：" + e.getMessage());
+        if (BmobUser.isLogin()) {
+            String publishUserId = BmobUser.getCurrentUser(User.class).getObjectId();
+            WorkOrder workOrder = new WorkOrder("求xx资源", "谢谢", publishUserId);
+            workOrder.save(new SaveListener<String>() {
+                @Override
+                public void done(String objectId, BmobException e) {
+                    if (e == null) {
+                        toast("添加数据成功，返回objectId为：" + objectId);
+                    } else {
+                        toast("创建数据失败：" + e.getMessage());
+                    }
                 }
-            }
-        });
+            });
+        }
+
+
     }
 
 

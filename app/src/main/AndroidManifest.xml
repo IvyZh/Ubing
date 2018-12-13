@@ -31,6 +31,10 @@
         </activity>
 
         <activity android:name=".activities.TestActivity">
+
+        </activity>
+
+        <activity android:name=".activities.PublishWOActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -118,9 +118,8 @@ public class ViewUtils {
                 // 4.反射执行方法
                 mMethod.setAccessible(true);
                 try {
-                    L.v("mHandlerType:"+mHandlerType+",v:"+v);
+                    //mMethod.invoke(mHandlerType, null);//Error:(122, 50) 警告: 最后一个参数使用了不准确的变量类型的 varargs 方法的非 varargs 调用;
                     mMethod.invoke(mHandlerType, null);
-
                 } catch (Exception e) {
                     e.printStackTrace();
                     try {
@@ -138,7 +137,6 @@ public class ViewUtils {
                     if (NetUtils.isNetworkConnected(context)) {//有网络
                         mMethod.setAccessible(true);
                         try {
-
                             mMethod.invoke(mHandlerType, null);
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -148,8 +146,6 @@ public class ViewUtils {
                                 e1.printStackTrace();
                             }
                         }
-
-
                     } else {//没网络 todo
                         Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
 

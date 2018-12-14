@@ -5,21 +5,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ivyzh.baselibrary.base.BaseActivity;
-import com.ivyzh.baselibrary.http.HttpUtils;
 import com.ivyzh.baselibrary.ioc.CheckNet;
 import com.ivyzh.baselibrary.ioc.OnClick;
 import com.ivyzh.baselibrary.ioc.ViewById;
-import com.ivyzh.baselibrary.log.L;
-import com.ivyzh.framelibrary.http.PreHttpCallBack;
+import com.ivyzh.baselibrary.navagationbar.DefaultNavigationBar;
 import com.ivyzh.ubing.R;
-import com.ivyzh.ubing.domain.NovelBean;
 
 public class MainActivity extends BaseActivity {
 
     @ViewById(R.id.tv_msg)
     private TextView mMsg;
-
-    private Button mBtnMsg;
 
     @Override
     protected int getContentView() {
@@ -28,63 +23,27 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initTitle() {
-
+        new DefaultNavigationBar.Builder(this)//这里还不能用this.getApplicationContext
+                .setTitle("主页")
+                .hideLeftIcon()
+                .hideRigntIcon()
+                .build();
     }
 
     @Override
     protected void initView() {
-        mMsg.setText("mMsg initView");
-        mBtnMsg = findViewById(R.id.btn_msg);
+        mMsg.setText("主页");
     }
 
     @Override
     protected void initData() {
-        mBtnMsg.setText("click ");
-
-    }
-
-
-    @OnClick(R.id.tv_msg)
-    @CheckNet(msg = R.string.net_invisible)
-    private void hello() {
-        Toast.makeText(this, "Hello.", Toast.LENGTH_LONG).show();
     }
 
 
     @OnClick(R.id.btn_msg)
-    private void hello2() {
-
-
-        String url = "https://www.baidu.com";
-
-        url = "https://www.apiopen.top/novelApi";
-        HttpUtils.with(this)
-                .addParam("name", "zz")
-                .addParam("pwd", "123456")
-                .post()
-                .url(url)
-                //.exchangeEngine(new XUtilsEngine())
-                .execute(new PreHttpCallBack<NovelBean>() {
-                    @Override
-                    public void onError(Exception e) {
-                        L.v("error -> " + e);
-
-                    }
-
-//                    @Override
-//                    public void onSuccess(String result) {
-//                        L.v("success -> " + result);
-//                        mMsg.setText(result.toString());
-//                        super.onSuccess(result);
-//                    }
-
-                    @Override
-                    public void onSuccess(NovelBean resultJson) {
-                        L.v("success -> " + resultJson.getData().size());
-                    }
-
-
-                });
+    private void click() {
+        toast("click");
+        startActivity(FeedBackActivity.class);
 
     }
 }

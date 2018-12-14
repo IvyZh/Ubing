@@ -113,7 +113,6 @@ public class OkHttpEngine implements IHttpEngine {
         for (Map.Entry<String, Object> entry : headerParams.entrySet()) {
             String key = entry.getKey();
             Object value = entry.getValue();
-            L.v("Key = " + key + ", Value = " + value);
             builder.add(key, value.toString());
         }
         return builder.build();
@@ -122,16 +121,8 @@ public class OkHttpEngine implements IHttpEngine {
 
     private RequestBody generateRequestBody(Map<String, Object> params) {
         JSONObject json = new JSONObject(params);
-       // FormBody.Builder builder = new FormBody.Builder();
         RequestBody body = FormBody.create(MediaType.parse("application/json"), json.toString());
         return body;
-       /* for (Map.Entry<String, Object> entry : params.entrySet()) {
-            String key = entry.getKey();
-            Object value = entry.getValue();
-            L.v("Key = " + key + ", Value = " + value);
-            builder.add(key, value.toString());
-        }
-        return builder.build();*/
     }
 
     private String joinUrl(String url, Map<String, Object> params) {
@@ -140,15 +131,11 @@ public class OkHttpEngine implements IHttpEngine {
         if (!url.endsWith("?")) {
             sb.append("?");
         }
-
-
         for (Map.Entry<String, Object> entry : params.entrySet()) {
             String key = entry.getKey();
             Object value = entry.getValue();
-            L.v("Key = " + key + ", Value = " + value);
             sb.append(key).append("=").append(value).append("&");
         }
-
         return sb.toString().substring(0, sb.toString().length() - 1);
 
     }

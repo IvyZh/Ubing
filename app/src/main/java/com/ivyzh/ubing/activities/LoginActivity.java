@@ -11,6 +11,7 @@ import com.ivyzh.baselibrary.ioc.ViewById;
 import com.ivyzh.baselibrary.log.L;
 import com.ivyzh.framelibrary.http.PreHttpCallBack;
 import com.ivyzh.ubing.R;
+import com.ivyzh.ubing.contants.LoginUserInfo;
 import com.ivyzh.ubing.domain.BaseModel;
 import com.ivyzh.ubing.http.Api;
 
@@ -78,7 +79,8 @@ public class LoginActivity extends BaseActivity {
                     @Override
                     public void onSuccess(BaseModel resultJson) {
                         if (!TextUtils.isEmpty(resultJson.getObjectId())) {
-                            toast("登陆成功");
+                            toast("登陆成功" + resultJson.getObjectId());
+                            LoginUserInfo.objectId = resultJson.getObjectId();
                             startActivity(MainActivity.class);
                         } else {
                             toast("登陆失败：" + resultJson.getError());

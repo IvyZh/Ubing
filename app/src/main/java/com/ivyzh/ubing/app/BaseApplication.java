@@ -1,6 +1,8 @@
-package com.ivyzh.ubing;
+package com.ivyzh.ubing.app;
 
 import android.app.Application;
+
+import com.ivyzh.framelibrary.http.KeyManager;
 
 import cn.bmob.v3.Bmob;
 

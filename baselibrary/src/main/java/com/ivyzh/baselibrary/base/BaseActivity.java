@@ -11,6 +11,8 @@ import android.widget.Toast;
 import com.ivyzh.baselibrary.ioc.ViewUtils;
 
 public abstract class BaseActivity extends AppCompatActivity {
+    public static Toast mToast;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,8 +37,22 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
-    protected void toast(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+    protected void toast(final String msg) {
+        if (mToast == null) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mToast = Toast.makeText(BaseActivity.this, "", Toast.LENGTH_SHORT);
+                }
+            });
+        }
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mToast.setText(msg);
+                mToast.show();
+            }
+        });
     }
 
 }

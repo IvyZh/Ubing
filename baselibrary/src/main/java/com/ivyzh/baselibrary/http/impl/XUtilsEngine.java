@@ -7,14 +7,14 @@ import com.ivyzh.baselibrary.log.L;
 import java.util.Map;
 
 public class XUtilsEngine implements IHttpEngine {
+
     @Override
-    public void get(String url, Map<String, Object> params, HttpCallBack callBack, boolean cache) {
-        L.v("XUtilsEngine get");
+    public void get(String url, Map<String, Object> headerParams, Map<String, Object> params, HttpCallBack callBack, boolean cache) {
+
     }
 
     @Override
-    public void post(String url, Map<String, Object> params, HttpCallBack callBack, boolean cache) {
-        L.v("XUtilsEngine post");
+    public void post(String url, Map<String, Object> headerParams, Map<String, Object> params, HttpCallBack callBack, boolean cache) {
 
     }
 }

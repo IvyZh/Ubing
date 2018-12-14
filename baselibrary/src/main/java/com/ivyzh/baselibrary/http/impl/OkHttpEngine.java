@@ -5,109 +5,133 @@ import com.ivyzh.baselibrary.http.HttpUtils;
 import com.ivyzh.baselibrary.http.IHttpEngine;
 import com.ivyzh.baselibrary.log.L;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.Headers;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 public class OkHttpEngine implements IHttpEngine {
 
-    private OkHttpClient okHttpClient = new OkHttpClient();
+    private static OkHttpClient okHttpClient;
+
+    static {
+        HttpLoggingInterceptor logInterceptor = new HttpLoggingInterceptor();
+        logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        okHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(logInterceptor)
+                .build();
+    }
 
     @Override
-    public void get(String url, Map<String, Object> params, final HttpCallBack callBack, final boolean cache) {
-        L.v("OkHttpEngine get");
+    public void get(String url, Map<String, Object> headerParams, Map<String, Object> params, final HttpCallBack callBack, final boolean cache) {
         String joinUrl = joinUrl(url, params);
-        L.v("joinUrl -> " + joinUrl);
+        L.v("OkHttpEngine get joinUrl -> " + joinUrl);
+        Headers headers = builderHeaders(headerParams);
         Request request = new Request.Builder()
                 .get()
+                .headers(headers)
                 .url(joinUrl)
                 .build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, final IOException e) {
-                HttpUtils.mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (callBack != null) {
-                            callBack.onError(e);
-                        }
-                    }
-                });
+                onFailureAction(callBack, e);
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
+                String result = response.body().string();
+                onSuccessAction(callBack, result);
+            }
+        });
+    }
 
-                final String result = response.body().string();
-                HttpUtils.mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (callBack != null) {
-                            callBack.onSuccess(result);
-                        }
-                    }
-                });
+    private void onSuccessAction(final HttpCallBack callBack, final String result) {
+        HttpUtils.mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                L.v("onSuccessAction -> " + result);
+                if (callBack != null) {
+                    callBack.onSuccess(result);
+                }
+            }
+        });
+    }
+
+    private void onFailureAction(final HttpCallBack callBack, final IOException e) {
+        HttpUtils.mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                L.v("onFailureAction -> " + e);
+                if (callBack != null) {
+                    callBack.onError(e);
+                }
             }
         });
     }
 
 
     @Override
-    public void post(String url, Map<String, Object> params, final HttpCallBack callBack, boolean cache) {
+    public void post(String url, Map<String, Object> headerParams, Map<String, Object> params, final HttpCallBack callBack, boolean cache) {
         L.v("OkHttpEngine post");
+        Headers headers = builderHeaders(headerParams);
         RequestBody requestBody = generateRequestBody(params);
         Request request = new Request.Builder()
                 .post(requestBody)
                 .url(url)
+                .headers(headers)
                 .build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, final IOException e) {
-                HttpUtils.mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (callBack != null) {
-                            callBack.onError(e);
-                        }
-                    }
-                });
+                onFailureAction(callBack, e);
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-
                 final String result = response.body().string();
-                HttpUtils.mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (callBack != null) {
-                            callBack.onSuccess(result);
-                        }
-                    }
-                });
+                onSuccessAction(callBack, result);
             }
         });
     }
 
-    private RequestBody generateRequestBody(Map<String, Object> params) {
-        FormBody.Builder builder = new FormBody.Builder();
-        for (Map.Entry<String, Object> entry : params.entrySet()) {
+    private Headers builderHeaders(Map<String, Object> headerParams) {
+        Headers.Builder builder = new Headers.Builder();
+        for (Map.Entry<String, Object> entry : headerParams.entrySet()) {
             String key = entry.getKey();
             Object value = entry.getValue();
             L.v("Key = " + key + ", Value = " + value);
             builder.add(key, value.toString());
         }
-
         return builder.build();
+
+    }
+
+    private RequestBody generateRequestBody(Map<String, Object> params) {
+        JSONObject json = new JSONObject(params);
+       // FormBody.Builder builder = new FormBody.Builder();
+        RequestBody body = FormBody.create(MediaType.parse("application/json"), json.toString());
+        return body;
+       /* for (Map.Entry<String, Object> entry : params.entrySet()) {
+            String key = entry.getKey();
+            Object value = entry.getValue();
+            L.v("Key = " + key + ", Value = " + value);
+            builder.add(key, value.toString());
+        }
+        return builder.build();*/
     }
 
     private String joinUrl(String url, Map<String, Object> params) {

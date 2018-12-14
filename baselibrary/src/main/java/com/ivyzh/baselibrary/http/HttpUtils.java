@@ -19,6 +19,7 @@ public class HttpUtils {
     private String mUrl;
     // 请求参数
     private Map<String, Object> mParams;
+    private Map<String, Object> mHeaderParams;
     // get请求标识
     private final int GET_REQUEST = 0x0011;
     // post请求标识
@@ -31,6 +32,7 @@ public class HttpUtils {
     private HttpUtils(Context context) {
         this.mContext = context;
         mParams = new HashMap<>();
+        mHeaderParams = new HashMap<>();
     }
 
     // 切换引擎
@@ -87,12 +89,12 @@ public class HttpUtils {
             callBack = HttpCallBack.DEFAULT_CALL_BACK;
         }
 
-        callBack.onPreExcute(mContext, mParams);
+        callBack.onPreExcute(mContext, mHeaderParams, mParams);
 
         if (mRequestMethod == GET_REQUEST) {
-            mHttpEngine.get(mUrl, mParams, callBack, mCache);
+            mHttpEngine.get(mUrl, mHeaderParams, mParams, callBack, mCache);
         } else if (mRequestMethod == POST_REQUEST) {
-            mHttpEngine.post(mUrl, mParams, callBack, mCache);
+            mHttpEngine.post(mUrl, mHeaderParams, mParams, callBack, mCache);
         }
     }
 

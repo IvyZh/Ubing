@@ -3,4 +3,27 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+
+    <color name="app_blue">#2E8FFF</color>
+    <!-- add mine-->
+    <color name="common_bg">#f5f6f8</color>
+    <color name="bottom_blue">#2E8FFF</color>
+    <color name="bottom_nor">#8a8a8a</color>
+    <color name="bottom_tab_bg">#FEFEFE</color>
+    <color name="white">#ffffff</color>
+
+    <color name="home_bg">#f2f2f2</color>
+
+    <color name="female">#F10C3E</color>
+    <color name="male">#6FD03B</color>
+    <!-- qn-->
+
+    <color name="title_color">#4A4A4A</color>
+    <color name="item_color">#333333</color>
+    <color name="color_22222">#222222</color>
+    <color name="color_text_hint">#4A4A4A</color>
+    <color name="color_white">#ffffff</color>
+
+    <color name="primary_text_disabled_material_light">#39000000</color>
 </resources>

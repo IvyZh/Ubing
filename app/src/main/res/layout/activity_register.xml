@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:orientation="vertical"
+              android:padding="@dimen/lr_margen">
+
+
+    <TextView
+        style="@style/register_label_style"
+        android:layout_width="match_parent"
+        android:text="注册"/>
+
+    <EditText
+        android:id="@+id/et_username"
+        style="@style/et_style"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:hint="请输入用户名"
+        android:text="zz"
+        />
+
+
+    <EditText
+        android:id="@+id/et_email"
+        style="@style/et_style"
+        android:hint="请输入注册邮箱"
+        android:inputType="textEmailAddress"
+        android:text="zz@163.com"
+        />
+
+    <EditText
+        android:id="@+id/et_pwd"
+        style="@style/et_style"
+        android:hint="请输入密码"
+        android:inputType="textPassword"
+        android:text="123456"
+        />
+
+    <EditText
+        android:id="@+id/et_pwd2"
+        style="@style/et_style"
+        android:hint="请确认密码"
+        android:inputType="textPassword"
+        android:text="123456"
+        />
+
+    <TextView
+        android:id="@+id/tv_change_register_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginTop="10dp"
+        android:text="手机号快速注册"
+        android:textColor="@color/color_22222"/>
+
+    <TextView
+        android:id="@+id/bt_register"
+        style="@style/login_btn_style"
+        android:text="完成注册"
+        android:textColor="@color/color_22222"
+        />
+
+    <TextView
+        android:id="@+id/tv_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="18dp"
+        android:text="已有账号，登录"/>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+
+    <TextView
+        android:id="@+id/tv_protocol"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:gravity="bottom|center"
+        android:text="注册/登录即代表同意《Ubing用户协议》"
+        android:textSize="12sp"/>
+</LinearLayout>
+

@@ -13,3 +13,4 @@ first commit.
 - Bmob
     - 快速入门：http://doc.bmob.cn/data/android/
     - 开发文档：http://doc.bmob.cn/data/android/develop_doc/#2
+    - Restful API文档：https://docs.bmob.cn/data/Restful/a_faststart/doc/index.html

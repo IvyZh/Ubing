@@ -6,6 +6,61 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+
+    <style name="item_tv_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/item_color</item>
+    </style>
+
+    <style name="divide_view_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.1dp</item>
+        <item name="android:background">@android:color/darker_gray</item>
+    </style>
+
+
+    <!--输入框样式风格-->
+    <style name="et_style">
+        <item name="android:layout_marginTop">30dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">44dp</item>
+        <item name="android:background">@drawable/shape_edittext</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:textColorHint">@color/color_text_hint</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
+    <!--登录按钮风格-->
+    <style name="login_btn_style" parent="et_style">
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/selector_btn_login_register</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!--登陆/注册提示label-->
+    <style name="register_label_style">
+        <item name="android:layout_marginTop">50dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/color_22222</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+
+    <!--个人中心提示label-->
+    <style name="setting_item_label_style">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/color_22222</item>
     </style>
 
 </resources>

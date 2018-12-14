@@ -7,7 +7,7 @@ import java.util.Map;
 public interface HttpCallBack {
 
 
-    void onPreExcute(Context context, Map<String, Object> params);
+    void onPreExcute(Context context, Map<String, Object> headerParams, Map<String, Object> params);
 
     void onError(Exception e);
 
@@ -15,8 +15,10 @@ public interface HttpCallBack {
 
 
     HttpCallBack DEFAULT_CALL_BACK = new HttpCallBack() {
+
+
         @Override
-        public void onPreExcute(Context context, Map params) {
+        public void onPreExcute(Context context, Map<String, Object> headerParams, Map<String, Object> params) {
 
         }
 

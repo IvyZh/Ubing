@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.ivyzh.baselibrary.http.HttpCallBack;
@@ -12,6 +13,8 @@ import com.ivyzh.baselibrary.utils.GsonUtils;
 import java.util.Map;
 
 public abstract class DeviceInfoHttpCallBack<T> implements HttpCallBack {
+    Context mContext;
+
     @Override
     public void onPreExcute(Context context, Map headerParams, Map params) {
         headerParams.put("X-Bmob-Application-Id", KeyManager.BMOB_APP_KEY);
@@ -21,7 +24,7 @@ public abstract class DeviceInfoHttpCallBack<T> implements HttpCallBack {
         params.put("brand", android.os.Build.BRAND);
         params.put("model", Build.MODEL);
         params.put("os", "android");
-
+        mContext = context;
     }
 
     @Override
@@ -57,5 +60,11 @@ public abstract class DeviceInfoHttpCallBack<T> implements HttpCallBack {
         return versionName;
     }
 
+    @Override
+    public void onError(Exception e) {
+        if (e.toString().contains("java.net.SocketTimeoutException: timeout")) {
+            Toast.makeText(mContext, "连接超时", Toast.LENGTH_SHORT).show();
+        }
+    }
 
 }

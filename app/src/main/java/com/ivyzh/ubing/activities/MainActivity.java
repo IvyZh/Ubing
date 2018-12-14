@@ -46,6 +46,7 @@ public class MainActivity extends BaseActivity {
         new DefaultNavigationBar.Builder(this)//这里还不能用this.getApplicationContext
                 .setTitle("主页")
                 .hideLeftIcon()
+                .hideRigntIcon()
                 .setRightListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -73,12 +74,14 @@ public class MainActivity extends BaseActivity {
         linearItemDecoration = new LinearLayoutItemDecoration(this, R.drawable.item_divider);
         mRecyclerView.addItemDecoration(linearItemDecoration);
 
-        list = DataUtils.generateData();
+        list = DataUtils.generateData(0);
+
         adapter = new DataAdapter(this, list, R.layout.item_image_textview);
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(int pos) {
                 toast("click  " + pos);
+                startActivity(WorkOrderInfoActivity.class);
             }
         });
 
@@ -97,18 +100,9 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-
-
-    }
-
-
-    @OnClick(R.id.btn_msg)
-    private void click() {
-        //startActivity(FeedBackActivity.class);
-
         HttpUtils.with(this).url(Api.WORK_ORDER)
-                .addParam("where", "{state=1}")
-                .addParam("where", "%7B%22state%22:1%7D")
+//                .addParam("where", "{state=1}")
+//                .addParam("where", "%7B%22state%22:1%7D")
                 .get().execute(new PreHttpCallBack<WorkOrderBean>() {
             @Override
             public void onSuccess(WorkOrderBean resultJson) {
@@ -122,11 +116,12 @@ public class MainActivity extends BaseActivity {
                     adapter.notifyDataSetChanged();
                 }
             }
-
-            @Override
-            public void onError(Exception e) {
-
-            }
         });
+    }
+
+
+    @OnClick(R.id.btn_msg)
+    private void click() {
+        startActivity(FeedBackActivity.class);
     }
 }

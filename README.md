@@ -14,3 +14,12 @@ first commit.
     - 快速入门：http://doc.bmob.cn/data/android/
     - 开发文档：http://doc.bmob.cn/data/android/develop_doc/#2
     - Restful API文档：https://docs.bmob.cn/data/Restful/a_faststart/doc/index.html
+- RecyclerView
+    - 通用的Adapter（CommonRecyclerAdapter）
+    - 通用的ViewHolder（CommonViewHolder）
+    - 条目的点击事件
+    - 分割线问题
+    - 多布局显示问题（todo）
+    - 添加头部（todo）
+    - 刷新（todo）
+    - 侧滑删除和拖动排序（todo）

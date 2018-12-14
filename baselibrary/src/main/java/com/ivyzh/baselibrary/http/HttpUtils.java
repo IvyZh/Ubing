@@ -6,6 +6,9 @@ import android.text.TextUtils;
 
 import com.ivyzh.baselibrary.http.impl.OkHttpEngine;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -74,9 +77,22 @@ public class HttpUtils {
     }
 
     public HttpUtils addParam(String key, Object value) {
-        mParams.put(key, value);
+        return addParam(key, value, false);
+    }
+
+    public HttpUtils addParam(String key, Object value, boolean isURLEncoder) {
+        if (isURLEncoder) {//需要编码
+            try {
+                mParams.put(key, URLEncoder.encode(value.toString(), "utf-8"));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        } else {
+            mParams.put(key, value);
+        }
         return this;
     }
+
 
     // 链式调用配置参数--end
     public void execute(HttpCallBack callBack) {

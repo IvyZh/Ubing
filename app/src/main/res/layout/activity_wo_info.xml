@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_msg"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_marginTop="@dimen/lr_margen"
+        android:background="@color/white"
+        android:gravity="left|top"
+        android:hint="您的建议与反馈对我们非常重要。"
+        android:padding="@dimen/lr_margen"
+        android:textColor="@color/item_color"
+        />
+
+
+
+</LinearLayout>
+

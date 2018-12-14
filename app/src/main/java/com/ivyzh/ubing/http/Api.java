@@ -10,6 +10,8 @@ public class Api {
     public static final String LOGIN = HOST_URL + "/login/";
     public static final String FEED_BACK = HOST_URL + "/classes/FeedBack";
     public static final String WORK_ORDER = HOST_URL + "/classes/WorkOrder";
+    public static final String WORK_ORDER_INFO = HOST_URL + "/classes/WorkOrder/{id}";
 
+    public static final String WORK_ORDER_COMMENT = HOST_URL + "/classes/CommentWorkOrder";
 
 }

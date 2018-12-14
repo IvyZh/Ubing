@@ -72,10 +72,6 @@ public class FeedBackActivity extends BaseActivity {
                         }
                     }
 
-                    @Override
-                    public void onError(Exception e) {
-
-                    }
                 });
 
     }

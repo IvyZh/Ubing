@@ -1,4 +1,4 @@
-package com.ivyzh.ubing.activities;
+package com.ivyzh.ubing.activities.test;
 
 import android.view.View;
 import android.widget.TextView;

@@ -4,6 +4,7 @@
     android:id="@+id/tv_data"
     android:layout_width="match_parent"
     android:layout_height="40dp"
+    android:background="#44ee00ff"
     android:gravity="center"
     android:text="注册/登录即代表同意《Ubing用户协议》"
     android:textSize="14sp"/>

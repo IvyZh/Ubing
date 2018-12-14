@@ -9,6 +9,7 @@ public class Api {
     public static final String REGISTER = HOST_URL + "/classes/_User";
     public static final String LOGIN = HOST_URL + "/login/";
     public static final String FEED_BACK = HOST_URL + "/classes/FeedBack";
+    public static final String WORK_ORDER = HOST_URL + "/classes/WorkOrder";
 
 
 }

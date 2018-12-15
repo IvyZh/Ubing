@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.ivyzh.baselibrary.log.L;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,6 +39,7 @@ public abstract class AbsNavigationBar<E extends AbsNavigationBar.Builder> imple
 
     @Override
     public void inflateView() {
+
 
         if (mBuilder.mParent == null) {
             ViewGroup activityRoot = ((Activity) mBuilder.mContext).findViewById(android.R.id.content);

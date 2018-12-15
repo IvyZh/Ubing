@@ -9,7 +9,7 @@ import com.ivyzh.baselibrary.http.HttpUtils;
 import com.ivyzh.baselibrary.ioc.OnClick;
 import com.ivyzh.baselibrary.ioc.ViewById;
 import com.ivyzh.baselibrary.log.L;
-import com.ivyzh.framelibrary.http.PreHttpCallBack;
+import com.ivyzh.framelibrary.http.UbingHttpCallBack;
 import com.ivyzh.ubing.R;
 import com.ivyzh.ubing.contants.LoginUserInfo;
 import com.ivyzh.ubing.domain.BaseModel;
@@ -45,7 +45,6 @@ public class LoginActivity extends BaseActivity {
 
     @OnClick({R.id.tv_forget_pwd, R.id.bt_login, R.id.tv_register, R.id.tv_protocol})
     public void onViewClicked(View view) {
-        L.v("onViewClicked:" + view.getId());
         switch (view.getId()) {
             case R.id.tv_forget_pwd:
                 break;
@@ -53,7 +52,7 @@ public class LoginActivity extends BaseActivity {
                 login();
                 break;
             case R.id.tv_register:
-                startActivity(RegisterActivity.class);
+                startActivityFinshSelf(RegisterActivity.class);
                 break;
             case R.id.tv_protocol:
                 break;
@@ -61,6 +60,12 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void login() {
+        boolean isTure = false;
+        if (isTure) {
+            startActivityFinshSelf(MainActivity.class);
+            return;
+        }
+
         String username = mEtUserName.getText().toString().trim();
         String pwd = mEtPwd.getText().toString().trim();
         if (TextUtils.isEmpty(username)) {
@@ -75,13 +80,13 @@ public class LoginActivity extends BaseActivity {
         HttpUtils.with(this).url(Api.LOGIN)
                 .addParam("username", username)
                 .addParam("password", pwd)
-                .execute(new PreHttpCallBack<BaseModel>() {
+                .execute(new UbingHttpCallBack<BaseModel>() {
                     @Override
                     public void onSuccess(BaseModel resultJson) {
                         if (!TextUtils.isEmpty(resultJson.getObjectId())) {
                             toast("登陆成功" + resultJson.getObjectId());
                             LoginUserInfo.objectId = resultJson.getObjectId();
-                            startActivity(MainActivity.class);
+                            startActivityFinshSelf(MainActivity.class);
                         } else {
                             toast("登陆失败：" + resultJson.getError());
                         }

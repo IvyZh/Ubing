@@ -51,7 +51,7 @@ public class CommonViewHolder extends RecyclerView.ViewHolder {
 
     public CommonViewHolder setImageUrl(int viewId, ImageLoader loader) {
         ImageView imageView = getView(viewId);
-        loader.loadImage(imageView);
+        loader.loadImage();//todo
         return this;
     }
 }

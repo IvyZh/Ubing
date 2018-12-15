@@ -11,6 +11,7 @@ first commit.
 - 完成BaseActivity
 - 完成简单的网络引擎，链式调用
 - Bmob
+    - 控制台：https://www.bmob.cn/app/list
     - 快速入门：http://doc.bmob.cn/data/android/
     - 开发文档：http://doc.bmob.cn/data/android/develop_doc/#2
     - Restful API文档：https://docs.bmob.cn/data/Restful/a_faststart/doc/index.html
@@ -23,3 +24,10 @@ first commit.
     - 添加头部（todo）
     - 刷新（todo）
     - 侧滑删除和拖动排序（todo）
+    
+- URL编码
+    - http://web.chacuo.net/charseturlencode
+- Glide4.0后支持圆形图片及其使用方式
+    - https://blog.csdn.net/qq_36523667/article/details/79492928
+    - compile 'com.github.bumptech.glide:glide:4.1.1'
+    - Glide.with(this).load(url).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(imageView);  

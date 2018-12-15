@@ -26,5 +26,5 @@
     <color name="color_white">#ffffff</color>
 
     <color name="primary_text_disabled_material_light">#39000000</color>
-    <color name="list_item_divider">#2E8FFF</color>
+    <color name="list_item_divider">#39000000</color>
 </resources>

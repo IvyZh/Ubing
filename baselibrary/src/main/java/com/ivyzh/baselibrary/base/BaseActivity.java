@@ -37,6 +37,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
+    protected void startActivityFinshSelf(Class<? extends Activity> clz) {
+        startActivity(new Intent(this, clz));
+        finish();
+    }
+
+
     protected void toast(final String msg) {
         if (mToast == null) {
             runOnUiThread(new Runnable() {

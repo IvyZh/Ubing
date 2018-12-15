@@ -6,12 +6,10 @@ import com.ivyzh.baselibrary.base.BaseActivity;
 import com.ivyzh.baselibrary.http.HttpUtils;
 import com.ivyzh.baselibrary.ioc.ViewById;
 import com.ivyzh.baselibrary.navagationbar.DefaultNavigationBar;
-import com.ivyzh.framelibrary.http.PreHttpCallBack;
+import com.ivyzh.framelibrary.http.UbingHttpCallBack;
 import com.ivyzh.ubing.R;
 import com.ivyzh.ubing.domain.WorkOrderBean;
 import com.ivyzh.ubing.http.Api;
-
-import java.util.List;
 
 /**
  * Created by Ivy on 2018/3/12.
@@ -45,7 +43,7 @@ public class WorkOrderInfoActivity extends BaseActivity {
     @Override
     protected void initData() {
         HttpUtils.with(this).url(Api.WORK_ORDER_INFO.replace("{id}", "835686f6da"))
-                .get().execute(new PreHttpCallBack<WorkOrderBean.ResultsBean>() {
+                .get().execute(new UbingHttpCallBack<WorkOrderBean.ResultsBean>() {
             @Override
             public void onSuccess(WorkOrderBean.ResultsBean resultJson) {
                 if (resultJson != null) {
@@ -55,14 +53,14 @@ public class WorkOrderInfoActivity extends BaseActivity {
             }
         });
 
-
+        //{"state":1}
         HttpUtils.with(this).url(Api.WORK_ORDER_COMMENT)
-//                .addParam("where", "{state=1}")
-                .addParam("where", "%7B%22state%22:1%7D")
-                .get().execute(new PreHttpCallBack<String>() {
+                .addParam("where", "{\"workOrderId\":\"835686f6da\"}", true)
+                .get().execute(new UbingHttpCallBack<String>() {
             @Override
             public void onSuccess(String resultJson) {
-
+                sb.append(resultJson);
+                mtvMsg.setText(sb.toString());
             }
         });
     }

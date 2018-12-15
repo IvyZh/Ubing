@@ -36,7 +36,6 @@ public class OkHttpEngine implements IHttpEngine {
     @Override
     public void get(String url, Map<String, Object> headerParams, Map<String, Object> params, final HttpCallBack callBack, final boolean cache) {
         String joinUrl = joinUrl(url, params);
-        // L.v("OkHttpEngine get joinUrl -> " + joinUrl);
         Headers headers = builderHeaders(headerParams);
         Request request = new Request.Builder()
                 .get()
@@ -85,7 +84,6 @@ public class OkHttpEngine implements IHttpEngine {
 
     @Override
     public void post(String url, Map<String, Object> headerParams, Map<String, Object> params, final HttpCallBack callBack, boolean cache) {
-        // L.v("OkHttpEngine post");
         Headers headers = builderHeaders(headerParams);
         RequestBody requestBody = generateRequestBody(params);
         Request request = new Request.Builder()

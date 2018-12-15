@@ -9,16 +9,11 @@ import com.ivyzh.baselibrary.http.HttpUtils;
 import com.ivyzh.baselibrary.ioc.OnClick;
 import com.ivyzh.baselibrary.ioc.ViewById;
 import com.ivyzh.baselibrary.log.L;
-import com.ivyzh.framelibrary.http.PreHttpCallBack;
+import com.ivyzh.framelibrary.http.UbingHttpCallBack;
 import com.ivyzh.ubing.R;
 import com.ivyzh.ubing.domain.BaseModel;
 import com.ivyzh.ubing.http.Api;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -57,13 +52,12 @@ public class RegisterActivity extends BaseActivity {
 
     @OnClick({R.id.bt_register, R.id.tv_login, R.id.tv_protocol, R.id.tv_change_register_type})
     public void onViewClicked(View view) {
-        L.v("onViewClicked:" + view.getId());
         switch (view.getId()) {
             case R.id.bt_register:
                 register();
                 break;
             case R.id.tv_login:
-                startActivity(LoginActivity.class);
+                startActivityFinshSelf(LoginActivity.class);
                 break;
             case R.id.tv_change_register_type://手机号快速注册&账号注册
 
@@ -111,7 +105,7 @@ public class RegisterActivity extends BaseActivity {
                 .addParam("username", userName)
                 .addParam("password", pwd)
                 .post()
-                .execute(new PreHttpCallBack<BaseModel>() {
+                .execute(new UbingHttpCallBack<BaseModel>() {
                     @Override
                     public void onSuccess(BaseModel resultJson) {
                         if (!TextUtils.isEmpty(resultJson.getObjectId())) {

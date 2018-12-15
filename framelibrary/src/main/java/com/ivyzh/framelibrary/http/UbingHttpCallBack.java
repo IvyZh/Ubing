@@ -12,7 +12,7 @@ import com.ivyzh.baselibrary.utils.GsonUtils;
 
 import java.util.Map;
 
-public abstract class PreHttpCallBack<T> implements HttpCallBack {
+public abstract class UbingHttpCallBack<T> implements HttpCallBack {
     Context mContext;
 
     @Override

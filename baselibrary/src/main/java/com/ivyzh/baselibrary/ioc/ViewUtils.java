@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.Toast;
 
-import com.ivyzh.baselibrary.log.L;
 import com.ivyzh.baselibrary.utils.NetUtils;
 
 import java.lang.reflect.Field;
@@ -81,6 +80,7 @@ public class ViewUtils {
                 // 3. 通过findViewById获取View
                 View view = viewFinder.findViewById(viewId);
 
+
                 if (view != null) {
                     // 4. 反射注入View属性
                     // 设置所有属性都能注入包括私有和公有
@@ -111,6 +111,7 @@ public class ViewUtils {
             mViewFinder = viewFinder;
         }
 
+        @SuppressWarnings("unchecked")
         @Override
         public void onClick(View v) {
             CheckNet checkNet = mMethod.getAnnotation(CheckNet.class);
@@ -121,7 +122,7 @@ public class ViewUtils {
                     //mMethod.invoke(mHandlerType, null);//Error:(122, 50) 警告: 最后一个参数使用了不准确的变量类型的 varargs 方法的非 varargs 调用;
                     mMethod.invoke(mHandlerType, null);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                     try {
                         mMethod.invoke(mHandlerType, v);
                     } catch (Exception e1) {

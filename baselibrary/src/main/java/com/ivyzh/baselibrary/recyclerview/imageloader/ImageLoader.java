@@ -9,6 +9,7 @@ import android.widget.ImageView;
 public abstract class ImageLoader {
     String mUrl;
     ImageView mImageView;
+    boolean mCircleCrop;
 
     public ImageLoader(String url) {
         mUrl = url;
@@ -19,5 +20,10 @@ public abstract class ImageLoader {
         mImageView = imageView;
     }
 
-    public abstract void loadImage(ImageView imageView);
+    public ImageLoader circleCrop() {
+        mCircleCrop = true;
+        return this;
+    }
+
+    public abstract void loadImage();
 }

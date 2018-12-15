@@ -22,9 +22,19 @@
     <color name="title_color">#4A4A4A</color>
     <color name="item_color">#333333</color>
     <color name="color_22222">#222222</color>
+    <color name="color_323232">#323232</color>
     <color name="color_text_hint">#4A4A4A</color>
     <color name="color_white">#ffffff</color>
 
     <color name="primary_text_disabled_material_light">#39000000</color>
-    <color name="list_item_divider">#39000000</color>
+    <color name="list_item_divider">#EBEBEB</color>
+
+
+    <!--i define color-->
+
+    <color name="color_wo_title">#171717</color>
+    <color name="color_wo_content">#3B3B3B</color>
+
+
+    <!--i define color-->
 </resources>

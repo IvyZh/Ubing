@@ -6,7 +6,8 @@ import com.ivyzh.baselibrary.log.L;
 
 import java.util.Map;
 
-public class XUtilsEngine implements IHttpEngine {
+// no use
+public abstract class XUtilsEngine implements IHttpEngine {
 
     @Override
     public void get(String url, Map<String, Object> headerParams, Map<String, Object> params, HttpCallBack callBack, boolean cache) {

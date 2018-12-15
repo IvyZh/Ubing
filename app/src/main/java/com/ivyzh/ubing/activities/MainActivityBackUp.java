@@ -53,7 +53,7 @@ public class MainActivityBackUp extends BaseActivity {
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(int pos) {
-                startActivity(WorkOrderInfoActivity.class);
+                startActivity(WorkOrderDescActivity.class);
             }
         });
         mRecyclerView.setAdapter(adapter);
@@ -81,6 +81,6 @@ public class MainActivityBackUp extends BaseActivity {
 
     @OnClick(R.id.float_button)
     private void click() {
-        startActivity(PublishWOActivity.class);
+        startActivity(PublishWorkOrderActivity.class);
     }
 }

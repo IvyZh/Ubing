@@ -36,6 +36,7 @@ public class OkHttpEngine implements IHttpEngine {
     @Override
     public void get(String url, Map<String, Object> headerParams, Map<String, Object> params, final HttpCallBack callBack, final boolean cache) {
         String joinUrl = joinUrl(url, params);
+        L.v("get url -> " + joinUrl);
         Headers headers = builderHeaders(headerParams);
         Request request = new Request.Builder()
                 .get()
@@ -106,6 +107,42 @@ public class OkHttpEngine implements IHttpEngine {
         });
     }
 
+    @Override
+    public void put(String url, Map<String, Object> headerParams, Map<String, Object> params, final HttpCallBack callBack, boolean cache) {
+        RequestBody body = generateRequestBody(params);//可能只针对Ubing
+        Headers headers = builderHeaders(headerParams);
+        Request request = new Request.Builder()
+                .put(body)
+                .url(url)
+                .headers(headers)
+                .build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, final IOException e) {
+                onFailureAction(callBack, e);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                final String result = response.body().string();
+                onSuccessAction(callBack, result);
+            }
+        });
+
+
+    }
+
+    private FormBody generateFormBody(Map<String, Object> params) {
+        FormBody.Builder builder = new FormBody.Builder();
+        for (Map.Entry<String, Object> entry : params.entrySet()) {
+            String key = entry.getKey();
+            Object value = entry.getValue();
+            builder.add(key, value.toString());
+        }
+        return builder.build();
+    }
+
     private Headers builderHeaders(Map<String, Object> headerParams) {
         Headers.Builder builder = new Headers.Builder();
         for (Map.Entry<String, Object> entry : headerParams.entrySet()) {
@@ -120,6 +157,11 @@ public class OkHttpEngine implements IHttpEngine {
     private RequestBody generateRequestBody(Map<String, Object> params) {
         JSONObject json = new JSONObject(params);
         RequestBody body = FormBody.create(MediaType.parse("application/json"), json.toString());
+
+        L.v(" - >" + json);
+        L.v(" - >" + body);
+
+
         return body;
     }
 

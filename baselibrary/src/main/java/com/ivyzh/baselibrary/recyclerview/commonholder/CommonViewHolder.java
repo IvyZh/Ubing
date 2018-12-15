@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ivyzh.baselibrary.recyclerview.imageloader.GlideInstance;
 import com.ivyzh.baselibrary.recyclerview.imageloader.ImageLoader;
 
 /**
@@ -52,6 +53,12 @@ public class CommonViewHolder extends RecyclerView.ViewHolder {
     public CommonViewHolder setImageUrl(int viewId, ImageLoader loader) {
         ImageView imageView = getView(viewId);
         loader.loadImage();//todo
+        return this;
+    }
+
+    public CommonViewHolder setImageUrl(int viewId, String url) {
+        ImageView imageView = getView(viewId);
+        GlideInstance.load(imageView, url, true);
         return this;
     }
 }

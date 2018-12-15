@@ -9,11 +9,25 @@ import com.ivyzh.baselibrary.http.HttpUtils;
 import com.ivyzh.baselibrary.ioc.OnClick;
 import com.ivyzh.baselibrary.ioc.ViewById;
 import com.ivyzh.baselibrary.log.L;
+import com.ivyzh.baselibrary.utils.GsonUtils;
 import com.ivyzh.framelibrary.http.UbingHttpCallBack;
 import com.ivyzh.ubing.R;
 import com.ivyzh.ubing.contants.LoginUserInfo;
 import com.ivyzh.ubing.domain.BaseModel;
+import com.ivyzh.ubing.domain.request.MyPointer;
 import com.ivyzh.ubing.http.Api;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.SaveListener;
+import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 public class LoginActivity extends BaseActivity {
 
@@ -50,6 +64,7 @@ public class LoginActivity extends BaseActivity {
                 break;
             case R.id.bt_login:
                 login();
+//                login2();
                 break;
             case R.id.tv_register:
                 startActivityFinshSelf(RegisterActivity.class);
@@ -59,12 +74,54 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
+    private void login2() {
+        BmobUser bu2 = new BmobUser();
+        bu2.setUsername("zz");
+        bu2.setPassword("123456");
+        bu2.login(new SaveListener<BmobUser>() {
+
+            @Override
+            public void done(BmobUser bmobUser, BmobException e) {
+                if (e == null) {
+                    toast("登录成功:");
+                    //通过BmobUser user = BmobUser.getCurrentUser()获取登录成功后的本地用户信息
+                    //如果是自定义用户对象MyUser，可通过MyUser user = BmobUser.getCurrentUser(MyUser.class)获取自定义用户信息
+                    startActivityFinshSelf(MainActivity.class);
+                } else {
+
+                }
+            }
+        });
+
+
+    }
+
     private void login() {
         boolean isTure = false;
         if (isTure) {
+
+/*            HashMap<String, Object> map = new HashMap<>();
+            map.put("key1", "value");
+            map.put("key2", 123);
+            MyPointer pointer = new MyPointer("name", "id");
+            String s = GsonUtils.toJson(pointer);
+            try {
+                JSONObject jo = new JSONObject(s);
+                map.put("key3", jo);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            JSONObject json = new JSONObject(map);
+            RequestBody body = FormBody.create(MediaType.parse("application/json"), json.toString());
+            L.v(" finall - >" + json);
+            L.v(" RequestBody - >" + body);*/
+
+
             startActivityFinshSelf(MainActivity.class);
             return;
         }
+
+        toast("login");
 
         String username = mEtUserName.getText().toString().trim();
         String pwd = mEtPwd.getText().toString().trim();

@@ -36,6 +36,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         startActivity(new Intent(this, clz));
     }
 
+    protected void startActivity(Class<? extends Activity> clz, String id) {
+        Intent intent = new Intent(this, clz);
+        intent.putExtra("id", id);
+        startActivity(intent);
+    }
+
 
     protected void startActivityFinshSelf(Class<? extends Activity> clz) {
         startActivity(new Intent(this, clz));

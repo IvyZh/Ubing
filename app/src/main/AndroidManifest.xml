@@ -30,7 +30,7 @@
 
 
         </activity>
-        <activity android:name=".activities.PublishWOActivity"/>
+        <activity android:name=".activities.PublishWorkOrderActivity"/>
         <activity android:name=".activities.LoginActivity">
 
             <intent-filter>
@@ -47,7 +47,7 @@
 
 
         <activity android:name=".activities.FeedBackActivity"/>
-        <activity android:name=".activities.WorkOrderInfoActivity"/>
+        <activity android:name=".activities.WorkOrderDescActivity"/>
 
 
     </application>

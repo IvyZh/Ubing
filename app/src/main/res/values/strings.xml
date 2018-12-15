@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">Ubing</string>
 
+    <string name="wo_content">家里情况介绍下。带宽上传40M下载200M.
+有台WIN10下载机，CPU是J3455.
+目前控制下载都是通过teamviewer.虽然TV也可以控制播放，但是颜色很差.
+家里看片都是直接局域网共享。
+有没有可能在不安装黑群晖的情况下，使用windows下的软件，在外网也能实现局域网下的视频播放？
+谢谢大家。</string>
+
+
     <string name="nav_open">抽屉打开</string>
     <string name="nav_close">抽屉关闭</string>
     <string name="common_navigation_daily">每日推荐</string>

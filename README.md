@@ -2,6 +2,13 @@
 first commit.
 
 
+### 2018.12.16
+
+- 当前进度
+    - 注册登录
+    - 发帖
+    - 
+
 ### 2018.12.14
 
 - AS 项目关联Github 和 解除Github关联 https://www.jianshu.com/p/8cd7f2f64379
@@ -14,7 +21,8 @@ first commit.
     - 控制台：https://www.bmob.cn/app/list
     - 快速入门：http://doc.bmob.cn/data/android/
     - 开发文档：http://doc.bmob.cn/data/android/develop_doc/#2
-    - Restful API文档：https://docs.bmob.cn/data/Restful/a_faststart/doc/index.html
+    - Restful API文档：https://docs.bmob.cn/data/Restful/b_developdoc/doc/index.html
+    - BQL：https://docs.bmob.cn/other/Other/m_bql/doc/index.html
 - RecyclerView
     - 通用的Adapter（CommonRecyclerAdapter）
     - 通用的ViewHolder（CommonViewHolder）

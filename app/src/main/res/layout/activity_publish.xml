@@ -4,11 +4,31 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
+    <EditText
+        android:id="@+id/et_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="这是标题：求xx资源"
+        />
+
+    <EditText
+        android:id="@+id/et_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/wo_content"
+        />
+
     <Button
         android:id="@+id/btn_publish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="发布"/>
+
+    <Button
+        android:id="@+id/btn_query"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="查询"/>
 
 
 </LinearLayout>

@@ -7,6 +7,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,7 +16,6 @@ import com.ivyzh.baselibrary.base.BaseActivity;
 import com.ivyzh.baselibrary.http.HttpUtils;
 import com.ivyzh.baselibrary.ioc.OnClick;
 import com.ivyzh.baselibrary.ioc.ViewById;
-import com.ivyzh.baselibrary.log.L;
 import com.ivyzh.baselibrary.navagationbar.DefaultNavigationBar;
 import com.ivyzh.baselibrary.recyclerview.imageloader.GlideImageLoader;
 import com.ivyzh.baselibrary.recyclerview.itemdecoration.LinearLayoutItemDecoration;
@@ -58,7 +58,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         new DefaultNavigationBar.Builder(this, mMainRootView)//这里还不能用this.getApplicationContext
                 .setTitle("主页")
                 .hideLeftIcon()
-                .hideRigntIcon()
+                .setRightText("刷新")
+                .setRightListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        loadWorkOrderData();//加载工单数据
+                    }
+                })
                 .build();
     }
 
@@ -71,14 +77,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         mTvUserName = mNavigationView.getHeaderView(0).findViewById(R.id.tv_username);
         linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        linearItemDecoration = new LinearLayoutItemDecoration(this, R.drawable.item_divider);
+        linearItemDecoration = new LinearLayoutItemDecoration(this, R.drawable.item_divider_middle);
         mRecyclerView.addItemDecoration(linearItemDecoration);
         list = new ArrayList<>();
-        adapter = new WorkOrderAdapter(this, list, R.layout.item_image_textview);
+        adapter = new WorkOrderAdapter(this, list, R.layout.item_workorder_info);
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(int pos) {
-                startActivity(WorkOrderInfoActivity.class);
+                startActivity(WorkOrderDescActivity.class, list.get(pos).getObjectId());
             }
         });
         mRecyclerView.setAdapter(adapter);
@@ -86,9 +92,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     protected void initData() {
-        loadWorkOederData();//加载工单数据
+        loadWorkOrderData();//加载工单数据
         loadSelfInfo();//加载当前登录用户信息
-
     }
 
     /**
@@ -109,28 +114,29 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     /**
      * 加载工单数据
      */
-    private void loadWorkOederData() {
-        HttpUtils.with(this).url(Api.WORK_ORDER)
-                .addParam("where", "%7B%22state%22:1%7D")
-                .get().execute(new UbingHttpCallBack<WorkOrderBean>() {
-            @Override
-            public void onSuccess(WorkOrderBean resultJson) {
-                if (resultJson.getResults() != null && resultJson.getResults().size() > 0) {
-                    list.clear();
-                    List<WorkOrderBean.ResultsBean> results = resultJson.getResults();
-                    if (results != null && results.size() > 0) {
-                        list.addAll(results);
-                        adapter.notifyDataSetChanged();
+    private void loadWorkOrderData() {
+        String bql = "select include author,* from WorkOrder order by createdAt desc";
+        HttpUtils.with(this).url(Api.BQL_QUERY)
+                .addParam("bql", bql)
+                .execute(new UbingHttpCallBack<WorkOrderBean>() {
+                    @Override
+                    public void onSuccess(WorkOrderBean resultJson) {
+                        if (resultJson.getResults() != null && resultJson.getResults().size() > 0) {
+                            list.clear();
+                            List<WorkOrderBean.ResultsBean> results = resultJson.getResults();
+                            if (results != null && results.size() > 0) {
+                                list.addAll(results);
+                                adapter.notifyDataSetChanged();
+                            }
+                        }
                     }
-                }
-            }
-        });
+                });
     }
 
 
     @OnClick(R.id.float_button)
     private void click() {
-        startActivity(PublishWOActivity.class);
+        startActivity(PublishWorkOrderActivity.class);
     }
 
 

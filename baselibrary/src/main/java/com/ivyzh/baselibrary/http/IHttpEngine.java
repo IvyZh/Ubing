@@ -12,6 +12,8 @@ public interface IHttpEngine {
 
     void post(String url, Map<String, Object> headerParams, Map<String, Object> params, HttpCallBack callBack, boolean cache);
 
+    void put(String url, Map<String, Object> headerParams, Map<String, Object> params, HttpCallBack callBack, boolean cache);
+
 
     // 取消请求
     // 下载文件

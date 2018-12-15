@@ -5,9 +5,9 @@
               android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tv_msg"
+        android:id="@+id/tv_title"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/lr_margen"
         android:background="@color/white"
         android:gravity="left|top"
@@ -16,6 +16,49 @@
         android:textColor="@color/item_color"
         />
 
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/lr_margen"
+        android:background="@color/white"
+        android:gravity="left|top"
+        android:hint="您的建议与反馈对我们非常重要。"
+        android:padding="@dimen/lr_margen"
+        android:textColor="@color/item_color"
+        />
+
+    <TextView
+        android:id="@+id/tv_comments"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/lr_margen"
+        android:background="@color/white"
+        android:gravity="left|top"
+        android:hint="您的建议与反馈对我们非常重要。"
+        android:padding="@dimen/lr_margen"
+        android:textColor="@color/item_color"
+        />
+
+    <EditText
+        android:id="@+id/et_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/lr_margen"
+        android:background="@color/white"
+        android:gravity="left|top"
+        android:padding="@dimen/lr_margen"
+        android:text="您的建议与反馈对我们非常重要。"
+        android:textColor="@color/item_color"
+        />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="addComment"
+        android:text="回复"
+        android:textColor="@color/color_wo_content"/>
 
 
 </LinearLayout>

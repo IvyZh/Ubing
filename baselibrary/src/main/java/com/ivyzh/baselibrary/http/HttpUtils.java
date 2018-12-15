@@ -27,6 +27,7 @@ public class HttpUtils {
     private final int GET_REQUEST = 0x0011;
     // post请求标识
     private final int POST_REQUEST = 0x0022;
+    private final int PUT_REQUEST = 0x0033;
     // 请求的方式
     private int mRequestMethod = GET_REQUEST;
     // 是否缓存
@@ -71,6 +72,11 @@ public class HttpUtils {
         return this;
     }
 
+    public HttpUtils put() {
+        mRequestMethod = PUT_REQUEST;
+        return this;
+    }
+
     public HttpUtils post() {
         mRequestMethod = POST_REQUEST;
         return this;
@@ -111,6 +117,8 @@ public class HttpUtils {
             mHttpEngine.get(mUrl, mHeaderParams, mParams, callBack, mCache);
         } else if (mRequestMethod == POST_REQUEST) {
             mHttpEngine.post(mUrl, mHeaderParams, mParams, callBack, mCache);
+        } else if (mRequestMethod == PUT_REQUEST) {
+            mHttpEngine.put(mUrl, mHeaderParams, mParams, callBack, mCache);
         }
     }
 
